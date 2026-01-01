@@ -5,5 +5,17 @@
 # To change the home page layout, edit the _layouts/home.html file.
 # See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 #
-layout: home
+layout: page
 ---
+
+<ul>
+  {% for collection in site.collections %}
+    {% unless collection.label == 'posts' %}
+      <li>
+        <a href="/{{ collection.label }}/">
+          {{ collection.label | capitalize }}
+        </a>
+      </li>
+    {% endunless %}
+  {% endfor %}
+</ul>
