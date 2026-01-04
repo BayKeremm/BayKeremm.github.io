@@ -1,0 +1,14 @@
+on arch 
+sudo pacman -S ruby
+then
+bundle config set --local path 'vendor/bundle'
+and then 
+add these to Gemfile
+gem "erb"
+gem "logger"
+gem "csv"
+finally
+bundle install 
+and run with 
+bundle exec jekyll serve
+
