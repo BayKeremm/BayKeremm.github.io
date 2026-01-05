@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Fundamental Theorem of Algebra | Unqualified Investigations</title>
+<title>Fundamental Theorem of Algebra | Kerem’s Investigations</title>
 <meta name="generator" content="Jekyll v4.4.1" />
 <meta property="og:title" content="Fundamental Theorem of Algebra" />
 <meta name="author" content="Kerem Okyay" />
@@ -12,19 +12,19 @@
 <meta property="og:description" content="The fundamental theorem of algebra states that any polynomial $p$ with complex coefficients and of degree at least $1$ has at least one zero in $\mathbb{C}$ (Version 1). This is equivalent to saying, a polynomial of degree $n \ge 1$ with complex coefficients has, counting multiplicities, exactly $n$ zeros among the complex numbers (Version 2)." />
 <link rel="canonical" href="http://localhost:4000/matrix-computations/fun-thm-alg/" />
 <meta property="og:url" content="http://localhost:4000/matrix-computations/fun-thm-alg/" />
-<meta property="og:site_name" content="Unqualified Investigations" />
+<meta property="og:site_name" content="Kerem’s Investigations" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2026-01-04T19:29:08+01:00" />
+<meta property="article:published_time" content="2026-01-05T16:32:48+01:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Fundamental Theorem of Algebra" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Kerem Okyay"},"dateModified":"2026-01-04T19:29:08+01:00","datePublished":"2026-01-04T19:29:08+01:00","description":"The fundamental theorem of algebra states that any polynomial $p$ with complex coefficients and of degree at least $1$ has at least one zero in $\\mathbb{C}$ (Version 1). This is equivalent to saying, a polynomial of degree $n \\ge 1$ with complex coefficients has, counting multiplicities, exactly $n$ zeros among the complex numbers (Version 2).","headline":"Fundamental Theorem of Algebra","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/matrix-computations/fun-thm-alg/"},"url":"http://localhost:4000/matrix-computations/fun-thm-alg/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Kerem Okyay"},"dateModified":"2026-01-05T16:32:48+01:00","datePublished":"2026-01-05T16:32:48+01:00","description":"The fundamental theorem of algebra states that any polynomial $p$ with complex coefficients and of degree at least $1$ has at least one zero in $\\mathbb{C}$ (Version 1). This is equivalent to saying, a polynomial of degree $n \\ge 1$ with complex coefficients has, counting multiplicities, exactly $n$ zeros among the complex numbers (Version 2).","headline":"Fundamental Theorem of Algebra","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/matrix-computations/fun-thm-alg/"},"url":"http://localhost:4000/matrix-computations/fun-thm-alg/"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Unqualified Investigations" />
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Kerem&apos;s Investigations" />
 </head>
 <body><header class="site-header">
 
-  <div class="wrapper"><a class="site-title" rel="author" href="/">Unqualified Investigations</a><nav class="site-nav">
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Kerem&#39;s Investigations</a><nav class="site-nav">
         <input type="checkbox" id="nav-trigger" class="nav-trigger" />
         <label for="nav-trigger">
           <span class="menu-icon">
@@ -43,8 +43,8 @@
 
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">Fundamental Theorem of Algebra</h1>
-    <p class="post-meta"><time class="dt-published" datetime="2026-01-04T19:29:08+01:00" itemprop="datePublished">
-        Jan 4, 2026
+    <p class="post-meta"><time class="dt-published" datetime="2026-01-05T16:32:48+01:00" itemprop="datePublished">
+        Jan 5, 2026
       </time></p>
   </header>
 
@@ -53,15 +53,17 @@
 This is equivalent to saying, a polynomial of degree $n \ge 1$  with complex coefficients has, counting multiplicities, exactly $n$ zeros among the complex numbers (Version 2).</p>
 
 <h4 id="why-equivalence">Why equivalence?</h4>
-<p>Version 1 $\implies$ Version 2
-Say order $n\ge 1$ polynomial $p(x)$ has root $r$, then this means $\exists \ q(x)$ of order $n-1$ such that 
+<p>Version 1 $\implies$ Version 2</p>
+
+<p>Say order $n\ge 1$ polynomial $p(x)$ has root $r$, then this means $\exists \ q(x)$ of order $n-1$ such that 
 \(p(x) = q(x) (x-r)\)
 Then we can descent through the orders of $q(x)$ making the same action using Version 1, therefore induction on powers of $q(x)$ gives us the $n-1$ roots. Then we can see that $p(x)$
-has $n$ roots.
-Version 1 $\impliedby$ Version 2
-If there are $n$ roots there is at least one</p>
+has $n$ roots.</p>
 
-<p>So if we have some proof action for one version that is enough</p>
+<p>Version 1 $\impliedby$ Version 2</p>
+
+<p>If there are $n$ roots there is at least one
+So if we have some proof action for one version that is enough</p>
 
 <h4 id="version-1-proof">Version 1 proof</h4>
 <p>The fact I will take for granted is “Winding number is invariant under homotopy”. 
@@ -73,16 +75,21 @@ What winding number and homotopy mean intuitively? Using Wikipedia I have the fo
 
 <p>The proof with this fact relies on tracking how the image of a circle in the complex plane winds around the origin as you change the circles radius.</p>
 
-<p>Assume monic polynomial of degree $n\ge 1$
-\(P(x) = x^n + a_{n-1} x^{n-1} + \cdots + a_{1}x + a_{0}\)
-and assume now $p(x)$ has no roots so $\nexists x \in \mathbb{C}$  such that $p(x) = 0$</p>
+<p>Assume monic polynomial of degree $n\ge 1$</p>
 
-<p>If you pick $R \gg 0 \in \mathbb{R}$ and $x=Re^{i\theta}$ then 
-\(P(Re^{i\theta}) = {R^ne^{in\theta}} + a_{n-1} {R^{n-1}e^{i(n-1)\theta}} + \cdots + a_{1}Re^{i\theta} + a_{0}\)
-since $R$ is huge, the first term will dominate. 
-\(P(Re^{i\theta}) \approx {R^ne^{in\theta}}\)</p>
+\[P(x) = x^n + a_{n-1} x^{n-1} + \cdots + a_{1}x + a_{0}\]
 
-<p>Observation: 
+<p>and assume now $p(x)$ has no roots so $\nexists x \in \mathbb{C}$  such that $p(x) = 0$</p>
+
+<p>If you pick $R \gg 0 \in \mathbb{R}$ and $x=Re^{i\theta}$ then</p>
+
+\[P(Re^{i\theta}) = {R^ne^{in\theta}} + a_{n-1} {R^{n-1}e^{i(n-1)\theta}} + \cdots + a_{1}Re^{i\theta} + a_{0}\]
+
+<p>since $R$ is huge, the first term will dominate.</p>
+
+\[P(Re^{i\theta}) \approx {R^ne^{in\theta}}\]
+
+<p><strong>Observation:</strong>
 if you take $\theta$ from $0$ to $2\pi$ the circle $e^{i\theta}$ makes one tour around the origin. 
 Important to see here, $e^{i n \theta}$ then will make $n$ tours around the origin 
 since we in a way accelerate with $n$.</p>

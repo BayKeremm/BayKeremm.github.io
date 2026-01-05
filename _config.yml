@@ -13,6 +13,9 @@ collections:
   matrix-computations: 
     output: true # Generates pages for each item
     permalink: /:collection/:path/ # Sets the URL structure
+  computational-geometry: 
+    output: true # Generates pages for each item
+    permalink: /:collection/:path/ # Sets the URL structure
 
 # Build settings
 

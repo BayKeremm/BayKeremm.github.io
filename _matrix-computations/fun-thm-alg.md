@@ -8,15 +8,17 @@ This is equivalent to saying, a polynomial of degree $n \ge 1$  with complex coe
 
 #### Why equivalence?
 Version 1 $\implies$ Version 2
+
 Say order $n\ge 1$ polynomial $p(x)$ has root $r$, then this means $\exists \ q(x)$ of order $n-1$ such that 
 $$
 p(x) = q(x) (x-r)
 $$
 Then we can descent through the orders of $q(x)$ making the same action using Version 1, therefore induction on powers of $q(x)$ gives us the $n-1$ roots. Then we can see that $p(x)$
 has $n$ roots.
-Version 1 $\impliedby$ Version 2
-If there are $n$ roots there is at least one
 
+Version 1 $\impliedby$ Version 2
+
+If there are $n$ roots there is at least one
 So if we have some proof action for one version that is enough
 
 
@@ -31,21 +33,24 @@ What winding number and homotopy mean intuitively? Using Wikipedia I have the fo
 The proof with this fact relies on tracking how the image of a circle in the complex plane winds around the origin as you change the circles radius. 
 
 Assume monic polynomial of degree $n\ge 1$
+
 $$
 P(x) = x^n + a_{n-1} x^{n-1} + \cdots + a_{1}x + a_{0}
 $$
+
 and assume now $p(x)$ has no roots so $\nexists x \in \mathbb{C}$  such that $p(x) = 0$ 
 
 If you pick $R \gg 0 \in \mathbb{R}$ and $x=Re^{i\theta}$ then 
-$$
-P(Re^{i\theta}) = {R^ne^{in\theta}} + a_{n-1} {R^{n-1}e^{i(n-1)\theta}} + \cdots + a_{1}Re^{i\theta} + a_{0}
-$$
+
+$$P(Re^{i\theta}) = {R^ne^{in\theta}} + a_{n-1} {R^{n-1}e^{i(n-1)\theta}} + \cdots + a_{1}Re^{i\theta} + a_{0}$$
+
 since $R$ is huge, the first term will dominate. 
+
 $$
 P(Re^{i\theta}) \approx {R^ne^{in\theta}} 
 $$
 
-Observation: 
+**Observation:**
 if you take $\theta$ from $0$ to $2\pi$ the circle $e^{i\theta}$ makes one tour around the origin. 
 Important to see here, $e^{i n \theta}$ then will make $n$ tours around the origin 
 since we in a way accelerate with $n$. 

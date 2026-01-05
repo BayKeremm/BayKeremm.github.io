@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Reference Domain to Physical Domain | Kerem’s Investigations</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Reference Domain to Physical Domain" />
+<meta name="author" content="Kerem Okyay" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Say $\underline{u}(\underline{x})$ takes vertices from the reference domain to the physical domain. We are interested in tetrahedra mappings." />
+<meta property="og:description" content="Say $\underline{u}(\underline{x})$ takes vertices from the reference domain to the physical domain. We are interested in tetrahedra mappings." />
+<link rel="canonical" href="http://localhost:4000/computational-geometry/ref-to-phy/" />
+<meta property="og:url" content="http://localhost:4000/computational-geometry/ref-to-phy/" />
+<meta property="og:site_name" content="Kerem’s Investigations" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-01-05T16:32:48+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Reference Domain to Physical Domain" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Kerem Okyay"},"dateModified":"2026-01-05T16:32:48+01:00","datePublished":"2026-01-05T16:32:48+01:00","description":"Say $\\underline{u}(\\underline{x})$ takes vertices from the reference domain to the physical domain. We are interested in tetrahedra mappings.","headline":"Reference Domain to Physical Domain","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/computational-geometry/ref-to-phy/"},"url":"http://localhost:4000/computational-geometry/ref-to-phy/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Kerem&apos;s Investigations" />
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Kerem&#39;s Investigations</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Reference Domain to Physical Domain</h1>
+    <p class="post-meta"><time class="dt-published" datetime="2026-01-05T16:32:48+01:00" itemprop="datePublished">
+        Jan 5, 2026
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Say $\underline{u}(\underline{x})$ takes vertices from the reference domain to the physical domain.
+We are interested in tetrahedra mappings.</p>
+
+<p>Reference tetrahedron: \(\underline{x}_{0}, \underline{x}_{1}, \underline{x}_{2}, \underline{x}_{3}\)</p>
+
+<p>Physical tetrahedron: \(\underline{u}_{0}, \underline{u}_{1}, \underline{u}_{2}, \underline{u}_{3}\)</p>
+
+<p>I know these vectors, reference ones I define, and the physical ones are the mesh tetrahedra</p>
+
+<p style="text-align: center;">
+  <img src="/assets/images/ref_to_phy.png" alt="drawing" width="400" />
+</p>
+
+<p>Since this transformation is affine (since in the physical domain it stays as a tetrahedron) it should be along the lines of</p>
+
+\[\underline{u}(\underline{x}) = J\underline{x}+ \underline{b}\]
+
+<p>which can be put into matrix form by subtracting the equation of vector zero from other ones:</p>
+
+\[\begin{bmatrix}
+\underline{u}_{1}-\underline{u}_{0} &amp;\underline{u}_{2}-\underline{u}_{0} &amp; \underline{u}_{3}-\underline{u}_{0}
+\end{bmatrix} 
+= J
+\begin{bmatrix}
+\underline{x}_{1}-\underline{x}_{0} &amp;\underline{x}_{2}-\underline{x}_{0} &amp; \underline{x}_{3}-\underline{x}_{0}
+\end{bmatrix}\]
+
+<p>Reminding myself that a column of left hand side is found by taking the full matrix A and the corresponding column of the matrix that contains edges of the reference tetrahedron.</p>
+
+<p>Here $J$ is the Jacobian matrix for the affine transformation $\underline{u}(\underline{x})$.</p>
+
+<p><strong>Aside</strong>
+Affine transformation is a combination of a linear transformation (rotation, scaling, or shearing) and a translation. 
+Take a point in the tetrahedron:</p>
+
+\[\underline{p} = \sum_{i=0}^3 \lambda_{i}* \underline{x}_{i}\]
+
+<p>Noting that $\sum_{i} \lambda_{i} = 1$ applying the mapping</p>
+
+\[\begin{align}
+\underline{p}' &amp;= \underline{u}(\underline{p}) = J\left( \sum_{i=0}^3 \lambda_{i}* \underline{x}_{i} \right)+b  \\
+&amp;= \left( \sum_{i=0}^3 \lambda_{i}* J\underline{x}_{i} \right)+ \left( \sum_{i=0}^3 \lambda_{i} \right)b  \\
+&amp;= \sum_{i=0}^3 \lambda_{i} \left( J \underline{x}_{i}+b \right) \\
+&amp;= \sum_{i=0}^3 \lambda_{i} \underline{u}_{i} \\
+\end{align}\]
+
+<p>The barycentric coordinates are the same.  Note that it is more like $\lambda_{i} = \lambda_{i}(\underline{p})$  barycentric coordinate is a function of position.  What type of function is that? 
+More clearly pick $\underline{x}_{0}$</p>
+
+\[\begin{align}
+\underline{x}- \underline{x}_{0} &amp;= \left( 1-\sum_{j=1}^3 \lambda_{j} \right) \underline{x}_{0}+\sum_{i=1}^3 \lambda_{i} \underline{x}_{i} - \underline{x}_{0} \\
+&amp;= \lambda_{1}(\underline{x}_{1}-\underline{x}_{0}) + \lambda_{2}(\underline{x}_{2}-\underline{x}_{0}) + \lambda_{3}(\underline{x}_{3}-\underline{x}_{0})  \\
+&amp;= 
+  \begin{bmatrix}
+\lambda_{1}  &amp;
+\lambda_{2}  &amp;
+\lambda_{3}  
+\end{bmatrix}  
+\begin{bmatrix}
+\underline{x}_{1}-\underline{x}_{0} &amp;\underline{x}_{2}-\underline{x}_{0} &amp; \underline{x}_{3}-\underline{x}_{0}
+\end{bmatrix}
+\end{align}\]
+
+<p>Then</p>
+
+\[\begin{bmatrix}
+\lambda_{1}   \\
+\lambda_{2}  \\
+\lambda_{3}  
+\end{bmatrix}   = M^{-1}(\underline{x}-\underline{x}_{0})\]
+
+<p>$M$ is constant, and each $\lambda_{i}$ is</p>
+
+\[\lambda_{i}(\underline{p}) = M^{-1}(i,:) \underline{x} + \text{constant}\]
+
+<p>Which is an affine function.</p>
+
+<p><strong>A more geometric intuition is</strong>: Think of a facet (\(\underline{x_{1}}, \underline{x_{2}}, \underline{x_{3}}\)) and the fourth point (\(\underline{x}_{0}\)), on the facet \(\lambda_{0} = 0\), now go to the fourth point we get \(\lambda_{0} = 1\) the rest \(0\). The \(\lambda_{0}\) represents the scaled height of the fourth point above the floor defined by the facet.</p>
+
+<p>So for a vertex $i$:</p>
+
+\[\lambda_{i}(\underline{x}) = \frac{\text{volume of tet formed by } \underline{x} \text{ and face opposite to i}}{\text{volume of the full tetrahedron}}\]
+
+<p>Let:</p>
+<ul>
+  <li>\(F_{i}\)  facet opposite to vertex $i$</li>
+  <li>\(\underline{n}_{i}\) area weighted normal of \(F_{i}\)</li>
+</ul>
+
+\[\underline{n}_{i} = \frac{1}{2} (\underline{e}_{0} \times  \underline{e}_{1})\]
+
+<ul>
+  <li>\(A_{i} = \|\underline{n}_{i}\|\) area of \(F_{i}\)</li>
+  <li>Normalized normal \(\underline{\bar{n}}_{i}\)</li>
+</ul>
+
+\[\underline{\bar{n}}_{i} = \frac{\underline{n}_{i}}{A_{i}}\]
+
+<ul>
+  <li>\(V\) is the volume of the tetrahedron (\(\frac{1}{3} \times(\text{face area}) \times (\text{height)}\))</li>
+</ul>
+
+<p>Given a point \(\underline{x}\), its signed distance to \(F_{i}\) is</p>
+
+\[h_{F_{i}}(\underline{x}) = \underline{\bar{n}}_{i} \cdot (\underline{x}-\underline{x}_{i})\]
+
+<p>Then we have</p>
+
+\[\begin{align}
+\text{Vol}(\underline{x}, F_{i}) &amp;= \frac{1}{3} A_{i}h_{F_{i}}(\underline{x}) \\
+&amp;= \frac{1}{3} \underline{n}_{i} (\underline{x}-\underline{x}_{i})
+\end{align}\]
+
+<p>Finally using the geometric intuition</p>
+
+\[\lambda_i(\underline{x}) = \frac{1}{3V} (\underline{n}_{i} \cdot (\underline{x} - \underline{x}_{i}))\]
+
+<p>Now I can compute the $\nabla \lambda_{i}$</p>
+
+\[\nabla \lambda_{i} = \frac{\underline{n}_{i}}{3V} = \frac{\underline{e}_{0} \times  \underline{e}_{1}}{6V}\]
+
+<p><strong>Intuition that comes:</strong> A barycentric coordinate is just the signed distance to the opposite face, normalized by the tetrahedron height.</p>
+
+<h3 id="jacobian-matrix-computation">Jacobian matrix computation</h3>
+
+\[\underline{u} = 
+\sum_{i=0}^3 \lambda_{i}(\underline{x}) * \underline{u}_{i}\]
+
+<p>The Jacobian matrix definition is</p>
+
+\[J = 
+\begin{bmatrix}
+\frac{\partial u_{1}}{\partial x_{1}} &amp; \frac{\partial u_{1}}{\partial x_{2}} &amp; \frac{\partial u_{1}}{\partial x_{3}}  \\
+
+\frac{\partial u_{2}}{\partial x_{1}} &amp; \frac{\partial u_{2}}{\partial x_{2}} &amp; \frac{\partial u_{2}}{\partial x_{3}}  \\
+
+\frac{\partial u_{3}}{\partial x_{1}} &amp; \frac{\partial u_{3}}{\partial x_{2}} &amp; \frac{\partial u_{3}}{\partial x_{3}}  \\
+\end{bmatrix} =
+\frac{\partial \underline{u}}{\partial \underline{x}}\]
+
+\[\begin{align}
+\frac{\partial \underline{u}}{\partial \underline{x}} &amp;= 
+\frac{\partial}{\partial \underline{x}} \left( 
+\sum_{i=0}^3 \lambda_{i}(\underline{x}) * \underline{u}_{i}
+\right)  \\
+\end{align}\]
+
+<p>Focus on $u_{1}$ from $\underline{u} = (u_{1}, u_{2}, u_{3})$</p>
+
+\[u_{1} = \sum_{k=0}^3\lambda_{k}(\underline{x})u_{k1}\]
+
+<p>And focus on $x_{2}$ from $\underline{x} = (x_{1}, x_{2}, x_{3})$</p>
+
+\[J_{12} = \frac{\partial u_{1}}{\partial x_{2}} =  \sum_{k=0}^3
+ u_{k1} \frac{\partial\lambda_{k} (\underline{x})}{\partial x_{2}}\]
+
+<p>This tells me that all four vertices $\underline{u}_{k}$ contribute at row 1 column 2, and similarly actually at each entry of $J$ they all contribute.</p>
+
+\[J_{mn} = \frac{\partial u_{m}}{\partial x_{n}} =  \sum_{k=0}^3
+ u_{km} \frac{\partial\lambda_{k} (\underline{x})}{\partial x_{n}}\]
+
+<p>So we can write</p>
+
+\[J = \sum_{k=0}^3 \underline{u}_{k} \otimes \nabla \lambda_{k}(\underline{x})\]
+
+<p>Evet.</p>
+
+  </div><a class="u-url" href="/computational-geometry/ref-to-phy/" hidden></a>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <!-- <p class="feed-subscribe"> -->
+        <!--   <a href="http://localhost:4000/feed.xml"> -->
+        <!--     <svg class="svg-icon orange"> -->
+        <!--       <use xlink:href="/assets/minima-social-icons.svg#rss"></use> -->
+        <!--     </svg><span>Subscribe</span> -->
+        <!--   </a> -->
+        <!-- </p> -->
+        <ul class="contact-list">
+          <li class="p-name">Kerem Okyay</li>
+          <li><a class="u-email" href="mailto:kerem13okyay at gmail">kerem13okyay at gmail</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p>This is a website for me where I will put things  I find interesting as future reference.
+</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
