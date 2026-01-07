@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Making sense of Foldover-free maps | Kerem’s Investigations</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Making sense of Foldover-free maps" />
+<meta name="author" content="Kerem Okyay" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This is my attempt to make sense of the derivations in the article “Foldover-free maps in 50 lines of code” from Garanzha and collaborators. The article." />
+<meta property="og:description" content="This is my attempt to make sense of the derivations in the article “Foldover-free maps in 50 lines of code” from Garanzha and collaborators. The article." />
+<link rel="canonical" href="http://localhost:4000/computational-geometry/foldover/" />
+<meta property="og:url" content="http://localhost:4000/computational-geometry/foldover/" />
+<meta property="og:site_name" content="Kerem’s Investigations" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-01-07T15:15:59+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Making sense of Foldover-free maps" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Kerem Okyay"},"dateModified":"2026-01-07T15:15:59+01:00","datePublished":"2026-01-07T15:15:59+01:00","description":"This is my attempt to make sense of the derivations in the article “Foldover-free maps in 50 lines of code” from Garanzha and collaborators. The article.","headline":"Making sense of Foldover-free maps","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/computational-geometry/foldover/"},"url":"http://localhost:4000/computational-geometry/foldover/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Kerem&apos;s Investigations" />
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Kerem&#39;s Investigations</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Making sense of Foldover-free maps</h1>
+    <p class="post-meta"><time class="dt-published" datetime="2026-01-07T15:15:59+01:00" itemprop="datePublished">
+        Jan 7, 2026
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>This is my attempt to make sense of the derivations in the article “Foldover-free maps in 50 lines of code” from Garanzha and collaborators. <a href="https://dl.acm.org/doi/10.1145/3450626.3459847">The article</a>.</p>
+
+<h1 id="reminders">Reminders</h1>
+<p>In a <a href="https://baykeremm.github.io/computational-geometry/ref-to-phy/">previous post</a> I derived:</p>
+
+\[J_{t} = \sum_{k=0}^3 \underline{u}_{k} \otimes \nabla \lambda_{k}(\underline{x})\]
+
+<p>Where \(\underline{u}_{k}\) and $\nabla \lambda_{k}(\underline{x})$ come from to the tetrahedron $t$</p>
+
+\[\begin{align}
+J_{t} 
+&amp;= 
+\begin{bmatrix}
+\underline{a}_{1} &amp; \underline{a}_{2} &amp; \underline{a}_{3} 
+\end{bmatrix}  \\
+&amp;=
+\sum_{k=0}^3 \underline{u}_{k} (\nabla \lambda_{k}(\underline{x}))^\top \\
+&amp;= 
+\sum_{k=0}^3 \underline{u}_{k}  
+ \begin{bmatrix}
+\frac{\partial \lambda_{j}}{\partial x_{1}}&amp; \frac{\partial \lambda_{j}}{\partial x_{2}} &amp; \frac{\partial \lambda_{j}}{\partial x_{3}} 
+\end{bmatrix}
+\end{align}\]
+
+<p>Which says</p>
+
+\[\underline{a}_{i} = \sum_{j=0}^3 \underline{u}_{j}  \frac{\partial\lambda_{j}}{\partial x_{i}}\]
+
+<p>And we can use this to compute:</p>
+
+\[\frac{\partial \underline{a}_{i}}{\partial \underline{u}_{j}} = \frac{\partial\lambda_{j}}{\partial x_{i}}I\]
+
+<p>The scalar $\frac{\partial\lambda_{j}}{\partial x_{i}}$ is called $z_{ji}$ in the article.</p>
+
+<h3 id="useful-to-remember-from-matrix-theory">Useful to remember from matrix theory</h3>
+<p>If $A$ is a square matrix, then the <em>minor</em> of the entry in the i-th row and j-th column (also called (i,j) minor or a first minor) is the determinant of the sub-matrix formed by deleting i-th row and j-th column and denoted by $M_{ij}$. The $(i,j)$ <em>cofactor</em> is obtained by multiplying the minor by $(-1)^{i+j}$.</p>
+
+<p>This is used for example in Laplace’s formula for the expansion of determinants, which is basically how I learned to compute determinants of larger matrix in terms of smaller ones. In words the determinant can be written as the sum of cofactors of any row or column of the matrix multiplied by the entries that generated them.</p>
+
+<p>Define the cofactor as</p>
+
+\[C_{ij} = (-1)^{i+j} M_{ij}\]
+
+<p>then the cofactor expansion along the j-th column</p>
+
+\[\det A=\sum_{i=1}^n a_{ij}C_{ij}\]
+
+<p>or the cofactor expansion along the i-th row</p>
+
+\[\det A=\sum_{j=1}^n a_{ij}C_{ij}\]
+
+<p>Define the cofactor matrix</p>
+
+\[C = \begin{bmatrix}
+C_{11} &amp; \cdots &amp; C_{1n} \\
+\vdots &amp; \ddots &amp; \vdots \\
+C_{n1} &amp; \cdots &amp; C_{nn} \\
+\end{bmatrix}\]
+
+<p>Then the inverse is given by</p>
+
+\[A^{-1} = \frac{1}{\det A} C^\top\]
+
+<p>The special name for cofactor matrix transposed is <em>adjugate matrix</em>.</p>
+
+<p>Using the Laplace’s expansion we can find the derivative below as</p>
+
+\[\frac{d}{dJ} \det J = \mathrm{C(J)}\]
+
+<p>Where $C(J)$ is the cofactor matrix of $J$.</p>
+
+<hr />
+
+<h1 id="understanding-the-gradient-expression">Understanding the gradient expression</h1>
+<p>Here are the definitions from the article:</p>
+
+\[\begin{align}
+\phi(J) &amp;= f_{\epsilon}(J) + \lambda g_{\epsilon}(J) \\
+&amp;= \frac{tr J^\top J}{\chi(\det J, \epsilon)^{2/3}} + \lambda \frac{\det^2J + 1}{\chi(\det J, \epsilon)}
+\end{align}\]
+
+<p>where</p>
+
+\[\chi(D,\epsilon) := \frac{D+\sqrt{ \epsilon^2+D^2 }}{2}\]
+
+<p>and the problem we want to solve</p>
+
+\[\lim_{\epsilon \rightarrow 0^+}
+\underset{U}{\arg\min} \ F(U,\epsilon)\]
+
+<p>discretized as</p>
+
+\[F(U,\epsilon) :=  \sum_{t\in \mathcal{T}} \phi(J_{t}) \text{vol}(T_t)\]
+
+<p>$U$ are basically the physical domain positions of the vertices, which are our inputs.</p>
+
+<p>I am interested in understanding the expression of the additive contribution to the gradient of $F$ from the tetrahedron $t$ with local indices $0 \dots 3$ and global indices $g_{0} \dots g_{3}$</p>
+
+\[(\nabla F)_{g_{j}} = ?\]
+
+<p>First</p>
+
+\[\frac{\partial \phi(J_{t})}{\partial  \underline{u}_{j}} = \sum_{i=1}^3 \frac{\partial \phi(J_{t})}{\partial  \underline{a}_{i}} \frac{\partial \underline{a}_{i}}{\partial  \underline{u}_{j}}\]
+
+<p>Define matrix (apparently this is called Piola-Kirchhoff stress tensor <a href="https://en.wikipedia.org/wiki/Piola%E2%80%93Kirchhoff_stress_tensors">link</a>)</p>
+
+\[P = \frac{\partial \phi(J_{t})}{\partial J_{t}} = 
+\begin{bmatrix}
+\frac{\partial \phi(J_{t})}{\partial  \underline{a}_{1}} &amp; \frac{\partial \phi(J_{t})}{\partial  \underline{a}_{2}} &amp; \frac{\partial \phi(J_{t})}{\partial  \underline{a}_{3}}
+\end{bmatrix}\]
+
+\[\frac{\partial \phi(J_{t})}{\partial  \underline{u}_{j}} = 
+\sum_{i=1}^3  P(:,i) 
+\frac{\partial\lambda_{j}}{\partial x_{i}}\]
+
+<p>Which is equal to in matrix notation</p>
+
+\[\frac{\partial \phi(J_{t})}{\partial  \underline{u}_{j}} =
+P \nabla \lambda_{j}\]
+
+<p>Then this is the additive contribution from index $j$ from tetrahedron $t$:</p>
+
+\[(\nabla F)_{g_{j}} +=  \frac{\partial F}{\partial \underline{u}_{j}} = 
+ Vol(t) P \nabla \lambda_{j}\]
+
+<p>To find the matrix $P$ we need some calculus: 
+For a scalar function $f$ derivative wrt to a matrix is:</p>
+
+\[\frac{\partial f}{\partial A} = 
+\begin{bmatrix}
+\frac{\partial f}{\partial A_{11}} &amp;  \frac{\partial f}{\partial A_{12}} &amp; \cdots &amp;  \frac{\partial f}{\partial A_{1n}} \\
+\vdots &amp; \vdots &amp; &amp; \vdots  \\
+\frac{\partial f}{\partial A_{m1}} &amp;  \frac{\partial f}{\partial A_{m2}} &amp; \cdots &amp;  \frac{\partial f}{\partial A_{mn}} \\
+\end{bmatrix}\]
+
+<p>The result is the same size as $A$.
+Then using that we can find the derivative of the below expression:</p>
+
+\[\begin{align}
+\mathrm{tr}J^\top J &amp;=  \|J\|_{F}^2 = \sum_{i=1}^3 \sum_{j=1}^3 (J_{ij})^2 \\
+\frac{d}{dJ} \mathrm{tr}J^\top J &amp;=  2J\\
+\end{align}\]
+
+<hr />
+
+<p>Change variables to:</p>
+
+\[\begin{align}
+I_{2} &amp;= \mathrm{tr}J^\top J \\
+I_{3} &amp;= \det J
+\end{align}\]
+
+<p>Then the first term becomes</p>
+
+\[\frac{\partial\phi}{\partial I_{2}}  \frac{I_{2}}{\partial J} = 
+ \frac{1}{\chi(I_{3}, \epsilon)^{2/3}} 2J\]
+
+<p>Moving onto a bit trickier territory on first term:</p>
+
+\[\frac{\partial}{\partial I_{3}} \frac{ I_{2}}{\chi(I_{3}, \epsilon)^{2/3}} = -\frac{2}{3}I_{2} \frac{\partial \chi(I_{3}, \epsilon)}{\partial I_{3}} (\chi(I_{3}, \epsilon))^{-5/3}\]
+
+<p>second term:</p>
+
+\[\frac{\partial}{\partial {I_{3}} }\frac{I_{3}^2+1}{\chi(I_{3},\epsilon)} =
+\frac{
+(2I_{3})\chi(I_{3},\epsilon) - 
+\frac{\partial \chi(I_{3}, \epsilon)}{\partial I_{3}} (I_{3}^2+1)
+}{
+\chi(I_{3}, \epsilon)^2
+}\]
+
+<p>Now combining:</p>
+
+\[\begin{align}
+P &amp;= 
+ \frac{\partial\phi}{\partial I_{2}}  \frac{I_{2}}{\partial J} + \frac{\partial\phi}{\partial I_{3}}  \frac{I_{3}}{\partial J} \\
+&amp;= 
+ \frac{\partial\phi}{\partial I_{2}}  2J + \frac{\partial\phi}{\partial I_{3}}  \mathrm{Cof(J)} \\
+\end{align}\]
+
+\[\begin{align}
+P &amp;= 
+ \frac{1}{\chi(I_{3}, \epsilon)^{2/3}} 2J + 
+\left( 
+-\frac{2}{3} I_{2} \frac{\partial \chi(I_{3})}{\partial I_{3}} \chi(I_{3})^{-5/3} 
++\lambda
+\frac{2I_{3}\chi(I_{3}) - \frac{\partial \chi(I_{3})}{\partial I_{3}} (I_{3}^2+1)}{\chi(I_{3})^2}
+\right) \mathrm{Cof}(J)
+\end{align}\]
+
+<h2 id="comparison-of-results">Comparison of results</h2>
+
+<p>What I derived:</p>
+
+\[\begin{align}
+(\nabla F)_{g_{j}} &amp; +=  \frac{\partial F}{\partial \underline{u}_{j}}  \\
+&amp;=  Vol(t) P \nabla \lambda_{j} \\
+&amp;= Vol(t) \sum_{i=1}^3  P(:,i) 
+\frac{\partial\lambda_{j}}{\partial x_{i}}
+\end{align}\]
+
+<p>What paper has:</p>
+
+<p>\((\nabla F)_{g_{j}} += \frac{\det S}{d!} \sum_{i=1}^3z_{ji} \frac{\partial \phi}{\partial  \underline{a}_{i}}\)</p>
+<ul>
+  <li>$z_{ji} =\frac{\partial\lambda_{j}}{\partial x_{i}}$</li>
+  <li>$\frac{\partial \phi}{\partial  \underline{a}_{i}} = P(:,i)$</li>
+</ul>
+
+<hr />
+
+<p>What I have for matrix $P$</p>
+
+\[\begin{align}
+P &amp;= 
+ \frac{1}{\chi(I_{3}, \epsilon)^{2/3}} 2J + 
+\left( 
+-\frac{2}{3} I_{2} \frac{\partial \chi(I_{3})}{\partial I_{3}} \chi(I_{3})^{-5/3} 
++\lambda
+\frac{2I_{3}\chi(I_{3}) - \frac{\partial \chi(I_{3})}{\partial I_{3}} (I_{3}^2+1)}{\chi(I_{3})^2}
+\right) \mathrm{Cof}(J)
+\end{align}\]
+
+<p>what paper has (which contains my interpretation on what chi needs to take as parameter cus they do not provide it)</p>
+
+\[\frac{\partial \phi}{\partial  \underline{a}_{i}} = \frac{2}{\chi(I_{3})^{2/3}} \underline{a}_{i} - \frac{1}{\chi(I_{3})} 
+\left(
+\frac{2}{3} \frac{I_{2}}{\chi(I_{3})^{2/3}} \frac{\partial \chi(I_{3})}{\partial I_{3}} - 2\lambda I_{3} +\lambda \frac{I_{3}^2+1}{\chi(I_{3})} \frac{\partial \chi(I_{3})}{\partial I_{3}}
+\right) \underline{b}_{i}\]
+
+<ul>
+  <li>$\underline{a}_{i} = J(:,i)$</li>
+  <li>$\underline{b}_{i} = \mathrm{Cof}(J)(:,i)$</li>
+</ul>
+
+<p>And it all corresponds.</p>
+
+<h1 id="disclaimer">Disclaimer</h1>
+<p>I used gemini “Guided Learning” mode to check my work. It helped me derive the expressions step by step and said where to look if I went wrong, 
+so it was very useful.</p>
+
+  </div><a class="u-url" href="/computational-geometry/foldover/" hidden></a>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <!-- <p class="feed-subscribe"> -->
+        <!--   <a href="http://localhost:4000/feed.xml"> -->
+        <!--     <svg class="svg-icon orange"> -->
+        <!--       <use xlink:href="/assets/minima-social-icons.svg#rss"></use> -->
+        <!--     </svg><span>Subscribe</span> -->
+        <!--   </a> -->
+        <!-- </p> -->
+        <ul class="contact-list">
+          <li class="p-name">Kerem Okyay</li>
+          <li><a class="u-email" href="mailto:kerem13okyay at gmail">kerem13okyay at gmail</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p>This is a website where I collect things I want to remember the intuition behind.
+</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

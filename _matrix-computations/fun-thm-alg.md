@@ -19,7 +19,8 @@ has $n$ roots.
 Version 1 $\impliedby$ Version 2
 
 If there are $n$ roots there is at least one
-So if we have some proof action for one version that is enough
+
+So if we have some proof for one version that is enough.
 
 
 #### Version 1 proof
