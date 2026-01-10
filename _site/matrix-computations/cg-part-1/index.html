@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Introduction to Conjugate Gradient - 1 | Kerem’s Investigations</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Introduction to Conjugate Gradient - 1" />
+<meta name="author" content="Kerem Okyay" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Part 1 of my notes from the very good article “An Introduction to the Conjugate Gradient Method Without the Agonizing Pain” by Jonathan Richard Shewchuck (1994) for future reference." />
+<meta property="og:description" content="Part 1 of my notes from the very good article “An Introduction to the Conjugate Gradient Method Without the Agonizing Pain” by Jonathan Richard Shewchuck (1994) for future reference." />
+<link rel="canonical" href="http://localhost:4000/matrix-computations/cg-part-1/" />
+<meta property="og:url" content="http://localhost:4000/matrix-computations/cg-part-1/" />
+<meta property="og:site_name" content="Kerem’s Investigations" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-01-10T21:10:42+01:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Introduction to Conjugate Gradient - 1" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Kerem Okyay"},"dateModified":"2026-01-10T21:10:42+01:00","datePublished":"2026-01-10T21:10:42+01:00","description":"Part 1 of my notes from the very good article “An Introduction to the Conjugate Gradient Method Without the Agonizing Pain” by Jonathan Richard Shewchuck (1994) for future reference.","headline":"Introduction to Conjugate Gradient - 1","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/matrix-computations/cg-part-1/"},"url":"http://localhost:4000/matrix-computations/cg-part-1/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Kerem&apos;s Investigations" />
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Kerem&#39;s Investigations</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Introduction to Conjugate Gradient - 1</h1>
+    <p class="post-meta"><time class="dt-published" datetime="2026-01-10T21:10:42+01:00" itemprop="datePublished">
+        Jan 10, 2026
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Part 1 of my notes from the very good article “An Introduction to the Conjugate Gradient Method Without the Agonizing Pain” by Jonathan Richard Shewchuck (1994) for future reference.</p>
+
+<hr />
+
+<h2 id="the-setting">The setting</h2>
+
+\[\begin{bmatrix}
+A_{11} &amp; A_{12} &amp; \cdots &amp; A_{1n} \\
+A_{21} &amp; A_{22} &amp; \cdots &amp; A_{2n} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots  \\
+A_{n1} &amp; A_{n2} &amp; \cdots &amp; A_{nn} \\
+\end{bmatrix} 
+\begin{bmatrix}
+x_{1} \\
+x_{2} \\
+\vdots \\
+x_{n} 
+\end{bmatrix}
+=
+\begin{bmatrix}
+b_{1} \\
+b_{2} \\
+\vdots \\
+b_{n} 
+\end{bmatrix}\]
+
+<p>The Conjugate Gradient (CG) method is a popular method for solving large systems of linear equations. $x$ is an unknown, $b$ is a known vector, and $A$ is a known, square, symmetric, positive-definite (or positive-indefinite) matrix.</p>
+
+<p>CG is an iterative method and it is suited for use with sparse matrices. If $A$ is <strong>dense</strong> the best course of action is likely to factor $A$ and solve the equation by backsubstitution.</p>
+
+<p><strong>Aside:</strong> An interesting intuition for such an equation is that the solution $x$ lies at the intersection point of $n$ hyperplanes, each having dimension $n-1$.</p>
+
+<hr />
+
+<p><strong>Definition: Positive-definite</strong>
+A matrix $A$ is <em>positive-definite</em> if, for every nonzero vector $x$,</p>
+
+\[x^TAx &gt; 0\]
+
+<hr />
+
+<h2 id="the-quadratic-form">The Quadratic Form</h2>
+<p>A <em>quadratic form</em> is simply a scalar, quadratic function of a vector with the form</p>
+
+\[f(x) = \frac{1}{2}x^TAx -b^Tx +c\]
+
+<p>The <em>gradient</em> of a quadratic form is the column vector</p>
+
+\[\nabla f(x) = 
+\begin{bmatrix}
+\frac{\partial}{\partial x_{1}}f(x) \\
+\frac{\partial}{\partial x_{2}}f(x) \\
+\vdots \\
+\frac{\partial}{\partial x_{n}}f(x) \\
+\end{bmatrix}\]
+
+<p>which points to the direction of the greatest increase of $f(x)$.</p>
+
+\[\begin{align}
+\frac{\partial}{\partial x_{k}} x^TAx &amp;= \frac{\partial}{\partial x_{k}} \left( \sum_{i=1}^n \sum_{j=1}^n x_{i}Ax_{j}\right) \\
+
+&amp;=  \underbrace{\sum_{j=1}^n A_{kj}x_{j}}_{i=k}  + \underbrace{\sum_{i=1}^n x_{i}A_{ik}}_{j=k} \\
+&amp;= A(k,:) x + A(:,k)^Tx \\
+\end{align}\]
+
+<p>The $k$-th component of the gradient is dot product of the row $k$ with $x$ and the dot product of column $k$ with x</p>
+
+\[\nabla x^TAx = Ax + A^Tx\]
+
+<p>Now we can find</p>
+
+\[\nabla f(x) = \frac{1}{2} Ax + \frac{1}{2} A^Tx - b\]
+
+<p>and if $A=A^T$</p>
+
+\[\nabla f(x) =  Ax - b\]
+
+<p>If you set the gradient to zero it is the linear system I would like to solve. Which means that the solution to $Ax=b$ is a <em>critical point</em> of $f(x)$.</p>
+
+<p>If $A$ is symmetric and positive-definite then the solution $x$ to $Ax=b$ is something special. 
+Say we pick a point as $p=x+e$,</p>
+
+\[\begin{align}
+f(x+e) &amp;= \frac{1}{2} (x+e)^TA(x+e) - b^T(x+e) + c \\
+&amp;= \frac{1}{2}(\underline{x^TAx}+x^TAe+e^TAx+e^TAe) \underline{-b^Tx}-b^Te +\underline{c}  \\
+&amp;= f(x) + e^T\underbrace{Ax}_{b} + \frac{1}{2} e^TAe - b^Te \quad \quad (\text{used }A^T=A) \\
+&amp;= f(x) + \frac{1}{2}e^TAe
+\end{align}\]
+
+<p>A is PD, which means this result is $f(x) + \text{positive}$ which means $x$ is a critical point that <em>minimizes</em> $f$.</p>
+
+<hr />
+<p><strong>Intuitions</strong></p>
+<ul>
+  <li>If $A$ is PD $\rightarrow$ the $f(x)$ is a paraboloid.</li>
+  <li>If $A$ is negative-definite $\rightarrow$ upside down of the case of $A$ is PD</li>
+  <li>If $A$ is singular $\rightarrow$ No solution is unique, the set of solutions is a line or hyperplane having uniform value for $f$.</li>
+  <li>$A$ none of the above $\rightarrow$ $x$ is a saddle point (where CG and steepest descent do not like)</li>
+</ul>
+
+<p>The values $b$ and $c$ in the quadratic form determine the minimum point of the paraboloid but do not affect its shape.</p>
+
+<h2 id="the-method-of-steepest-descent">The Method of Steepest Descent</h2>
+
+<p><strong>Idea:</strong> Take an arbitrary start point and slide down to the bottom of the paraboloid through series of steps that update the starting point. The step is taken in the direction of the steepest descent which is $-\nabla f(x_{(i)})= b-Ax_{(i)}$.</p>
+
+<ul>
+  <li>The <em>error</em> $e_{(i)}=x_{(i)}-x$ tells how far we are away from the solution</li>
+  <li>The <em>residual</em> $r_{(i)}=b-Ax_{(i)}$ indicates how far we are from the correct value of $b$</li>
+</ul>
+
+\[\begin{align}
+r_{(i)}&amp;=b-Ax_{(i)} \\
+&amp;= Ax-Ax_{(i)} \\
+&amp;=Ae_{(i)}
+\end{align}\]
+
+<p>Think of the residual is the error transformed by $A$ into the same space as $b$ (for linear problems).</p>
+
+<p>Also</p>
+
+\[r_{(i)} = b-Ax_{(i)} = -f'(x_{(i)})\]
+
+<p>which suggests we can think of the residual as the direction of the steepest descent.</p>
+
+<p><strong>To keep in mind:</strong> Residual = direction of the steepest descent</p>
+
+<h3 id="line-search">Line search</h3>
+<p>Suppose we start with $x_{(0)}$, the first step is along the direction $r_{(0)}$.</p>
+
+\[x_{(1)} = x_{(0)} + \alpha r_{(0)}\]
+
+<p>The question line search answers is “what is $\alpha$?”</p>
+
+<p><strong>Observation:</strong> When $A$ is positive definite, the $f(x)$ is a paraboloid. Now, we draw a line along the direction of $r_{(0)}$ that starts at $x_{(0)}$ and extends in the direction of the negative gradient. This is like getting a cross section of the paraboloid which is a parabola defined by the intersection of the line and the paraboloid.</p>
+
+<p>Now, the goal is to select the minimum of this parabola (cross section) which corresponds to the directional derivative of $f$ wrt to $\alpha$ being zero.</p>
+
+\[\begin{align}
+f(x_{(1)}) &amp;= f(x_{(0)}+\alpha r_{(0)}) \\
+\frac{d}{d\alpha} f(x_{(1)}) &amp;= f'(x_{(1)})^T \frac{d}{d\alpha}x_{(1)} \\
+&amp;= f'(x_{(1)})^T r_{(0)} \\
+&amp;= 0
+\end{align}\]
+
+<p>Meaning, $\alpha$ should be chosen so that $r_{(0)}$ and $f’(x_{(1)})$ are orthogonal.</p>
+
+<p><strong>Another perspective on why orthogonality at the minimum:</strong> The slope of the parabola at any point and the gradient of the quadratic form are related. The slope at any point is equal to the magnitude of the gradient projected onto the line. When this projection is not zero, that means we can actually go a bit further to reach a lower value for $f$. So when the projection is 0, this means we are at the minimum of the parabola.</p>
+
+<p>Therefore $\alpha$ is chosen to satisfy this orthogonality.  From definition $f’(x_{(1)}) = -r_{(1)}$</p>
+
+\[\begin{align}
+r_{(1)}^T r_{(0)} &amp;= 0 \\
+(b-Ax_{(1)})^Tr_{(0)} &amp;= 0 \\
+(b-A(x_{(0)}+\alpha r_{(0)}))^Tr_{(0)} &amp;= 0 \\
+(b-Ax_{(0)})^Tr_{(0)}-\alpha (Ar_{(0)})^Tr_{(0)} &amp;= 0 \\
+(b-Ax_{(0)})^Tr_{(0)} &amp;= \alpha (Ar_{(0)})^Tr_{(0)}  \\
+r_{(0)}^Tr_{(0)} &amp;= \alpha (Ar_{(0)})^Tr_{(0)}  \\
+\alpha &amp;= \frac{r_{(0)}^Tr_{(0)}}{r_{(0)}^TAr_{(0)}}
+\end{align}\]
+
+<h3 id="putting-together">Putting together</h3>
+<p>The method of steepest descent is then</p>
+
+\[\begin{align}
+r_{(i)} &amp;= b - Ax_{(i)}  \\
+\alpha_{(i)} &amp;= \frac{r_{(i)}^Tr_{(i)}}{r_{(i)}^TAr_{(i)}} \\
+x_{(i+1)} &amp;= x_{(i)} + \alpha_{(i)}r_{(i)} \\
+(x_{(i+1)} -x &amp;= x_{(i)} -x + \alpha_{(i)}r_{(i)} )\\
+(e_{(i+1)}  &amp;= e_{(i)} + \alpha_{(i)}r_{(i)} )\\
+\end{align}\]
+
+<hr />
+
+<h2 id="convergence-of-steepest-descent">Convergence of Steepest descent</h2>
+
+<h3 id="instant-convergence">Instant convergence</h3>
+<p>In the case where $e_{(i)}$ is an eigenvector with eigenvalue $\lambda_{e}$</p>
+
+\[\begin{align}
+r_{(i)} = -A e_{(i)} &amp;= -\lambda_{e} e_{(i)} \\
+e_{(i+1)} &amp;= e_{(i)} + \frac{r_{(i)}^Tr_{(i)}}{r_{(i)}^TAr_{(i)}} r_{(i)} \\
+&amp;= e_{(i)}+\frac{r_{(i)}^Tr_{(i)}}{r_{(i)}^TA(-\lambda_{e}Ae_{(i)})} (-\lambda_{e}e_{(i)}) \\
+&amp;= e_{(i)}+\frac{r_{(i)}^Tr_{(i)}}{\lambda_{e}r_{(i)}^Tr_{(i)}} (-\lambda_{e}e_{(i)}) \\
+&amp;= 0
+\end{align}\]
+
+<p>The residual points directly to the center of the ellipsoids of the paraboloid defined by $f(x)$. 
+By choosing $\alpha_{(i)} = \lambda_{e}^{-1}$ gives instant convergence.</p>
+
+<p><strong>More general analysis</strong>
+If $A$ is symmetric, then there exists a set of $n$ orthonormal eigenvectors of $A$. Then express the error as a linear combination of eigenvectors,</p>
+
+\[e_{(i)} = \sum_{j=1}^n \xi_{j}v_{j}\]
+
+<p>Then below are some expression derived from the error above</p>
+
+\[\begin{align}
+r_{(i)} = -Ae_{(i)} &amp;= -\sum_{j} \xi_{j} \lambda_{j}v_{j} \\
+\|e_{(i)}\|^2 = e_{(i)}^Te_{(i)} &amp;=  \sum_{j} \xi_{j}^2 \\
+e_{(i)}^TAe_{(i)} &amp;= \left( \sum_{j}\xi_{j}v_{j}^T \right)\sum_{j} \xi_{j} \lambda_{j}v_{j} \\
+&amp;= \sum_{j} \xi_{j}^2 \lambda_{j} \\
+\|r_{(i)}\|^2 = r_{(i)}^Tr_{(i)} &amp;=  \sum_{j} \xi_{j}^2 \lambda_{j}^2 \\
+r_{(i)}^TAr_{(i)} &amp;= \sum_{j} \xi_{j} \lambda_{j}v_{j} \left( \sum_{j} \xi_{j} \lambda_{j}^2v_{j} \right) \\
+&amp;= \sum_{j} \xi_{j}^2 \lambda_{j}^3
+\end{align}\]
+
+<p>Back to the analysis</p>
+
+\[e_{(i+1)} = e_{(i)} + \frac{\sum_{j}\xi_{j}^2 \lambda_{j}^2}{\sum_{j}\xi_{j}^2 \lambda_{j}^3} r_{(i)}\]
+
+<p>If all eigenvectors have a common eigenvalue $\lambda$ then</p>
+
+\[\begin{align}
+e_{(i+1)} &amp;= e_{(i)} + \frac{ \lambda^2\sum_{j}\xi_{j}^2 }{\lambda^3\sum_{j}\xi_{j}^2 } \underbrace{r_{(i)}}_{-\lambda e_{(i)}} \\
+&amp;= 0
+\end{align}\]
+
+<p>This is because when all the eigenvalues are equal, the ellipsoid is spherical, hence no matter what point you start at the residual must point to the center of the sphere. Thus, again instant convergence.</p>
+
+<p><strong>Note:</strong> However if there are several unequal, nonzero eigenvalues no choice of $\alpha_{(i)}$ will be able to get us to the center, then the best choice of direction has to be a compromise.
+Longer components have the precedence, and that means that it is possible that some shorter components at a given iteration become larger components at a later iteration. 
+But for not indeterminate increase. This is the reason why methods steepest descent and conjugate gradients are called <em>roughers</em>.</p>
+
+<h3 id="general-convergence">General convergence</h3>
+
+<p><strong>Definition: Energy norm</strong></p>
+
+\[\|e\|_{A} = (e^TAe)^{1/2}\]
+
+<p>Minimizing \(\|e_{(i)}\|_{A}\) is equivalent to minimizing \(f(x_{(i)})\), why? Because,</p>
+
+\[f(x_{(i)}) = f(x) + \frac{1}{2} \underbrace{(x_{(i)}-x)^TA(x_{(i)}-x)}_{\|e_{(i)}\|_{A}^2}\]
+
+<p>With this we have</p>
+
+\[\begin{align}
+\|e_{(i+1)}\|_{A}^2 &amp;= e_{(i+1)}^TAe_{(i+1)} \\
+&amp;= (e_{(i)}+\alpha r_{(i)})^T A (e_{(i)}+\alpha r_{(i)}) \\
+
+&amp;=  \|e_{(i)}\|_{A}^2 + 2\alpha_{(i)} r_{(i)}^TAe_{(i)} + \alpha_{(i)}^2r_{(i)}^TAr_{(i)} \\
+\end{align}\]
+
+<p>Then focusing on</p>
+
+\[\begin{align}
+2\alpha_{(i)} r_{(i)}^T\underbrace{Ae_{(i)}}_{-r_{(i)}} + \alpha_{(i)}^2r_{(i)}^TAr_{(i)} &amp;= 
+2 \frac{r_{(i)}^T r_{(i)}}{r_{(i)}^TAr_{(i)}} -r_{(i)}^Tr_{(i)} + 
+ \left( \frac{r_{(i)}^T r_{(i)}}{r_{(i)}^TAr_{(i)}}\right)^2r_{(i)}^TAr_{(i)} \\
+
+
+ &amp;=  -\frac{(r_{(i)}^T r_{(i)})^2}{r_{(i)}^TAr_{(i)}}
+\end{align}\]
+
+<p>Plugging back in</p>
+
+\[\begin{align}
+\|e_{(i+1)}\|_{A}^2 
+&amp;= \|e_{(i)}\|_{A}^2 -\frac{(r_{(i)}^T r_{(i)})^2}{r_{(i)}^TAr_{(i)}} \\
+&amp;= \|e_{(i)}\|_{A}^2 \left(1 - \frac{(r_{(i)}^T r_{(i)})^2}{r_{(i)}^TAr_{(i)}\|e_{(i)}\|_{A}^2}\right)\\
+&amp;= \|e_{(i)}\|_{A}^2 \left(1 - \frac{(\sum_{j} \xi_{j}^2 \lambda_{j}^2)^2}{(\sum_{j} \xi_{j}^2 \lambda_{j}^3) \sum_{j} \xi_{j}^2 \lambda_{j}}\right)\\
+&amp;= \|e_{(i)}\|_{A}^2 \omega^2
+\end{align}\]
+
+<p>The convergence analysis depends on finding an upper bound for $\omega$. But this shows already that the weights $\xi_{j}$ and eigenvalues $\lambda_{j}$ affect convergence.</p>
+
+<h3 id="for-n2">For n=2</h3>
+
+<p><strong>Definition: Spectral condition number</strong>
+Assume $\lambda_{1} \ge \lambda_{2}$</p>
+
+\[\kappa = \frac{\lambda_{1}}{\lambda_{2}} \ge 1\]
+
+<p><strong>Definition: Slope of</strong> $e_{(i)}$
+Relative to the coordinate system defined by the eigenvectors</p>
+
+\[\mu = \frac{\xi_{2}}{\xi_{1}}\]
+
+<p>Analysis continues to find an upper bound (worst case) for $\omega$ in the case when $n=2$</p>
+
+\[\begin{align}
+\omega^2 &amp;= \left(1 - \frac{(\sum_{j} \xi_{j}^2 \lambda_{j}^2)^2}{(\sum_{j} \xi_{j}^2 \lambda_{j}^3) \sum_{j} \xi_{j}^2 \lambda_{j}}\right) \\
+&amp;= 1 - \frac{(\xi_{1}^2 \lambda_{1}^2+\xi_{2}^2 \lambda_{2}^2)^2}{(\xi_{1}^2\lambda_{1}^3+\xi_{2}^2\lambda_{2}^3)(\xi_{1}^2\lambda_{1}+\xi_{2}^2\lambda_{2})} (\frac{\xi_{1}^2\lambda_{2}^2}{\xi_{1}^2\lambda_{2}^2})^2  \\
+&amp;= 1 - \frac{(\kappa^2+\mu^2)^2}{(\xi_{1}^2\lambda_{1}^3+\xi_{2}^2\lambda_{2}^3)(\xi_{1}^2\lambda_{1}+\xi_{2}^2\lambda_{2})} \frac{1}{\frac{1}{\xi_{1}^2\lambda_{2}^3}} \frac{1}{\frac{1}{\xi_{1}^2\lambda_{2}^1}} \\
+&amp;= 1 - \frac{(\kappa^2+\mu^2)^2}{(\kappa^3+\mu^2)(\kappa+\mu^2)}  \\
+\end{align}\]
+
+<p>Because $A$ is fixed $\kappa$ is constant. Did the computation, $\omega$ maximizes when $\mu = \pm \kappa$.</p>
+
+\[\begin{align}
+\omega^2 &amp;\le 1 - \frac{4\kappa^4}{\kappa^5+2\kappa^4+\kappa^3} \\
+&amp;= \frac{(k-1)^2}{(k+1)^2} \\
+\omega &amp;\le \frac{\kappa-1}{\kappa+1}
+\end{align}\]
+
+<p><strong>Remarks:</strong> The more <em>ill-conditioned</em> the matrix is (that means the larger its condition number $\kappa$), the slower the convergence of steepest descent.</p>
+
+<p><strong>Foreshadowing:</strong> This upper bound for $\omega$ is also valid for $n&gt;2$ if the condition number of a symmetric, PD matrix is defined to be</p>
+
+\[\kappa = \frac{\lambda_{\max}}{\lambda_{\min}}\]
+
+<p>which is the ratio of the largest to smallest eigenvalue.</p>
+
+<h3 id="convergence-results-for-steepest-descent">Convergence results for Steepest Descent</h3>
+<p>Two results from the analysis so far</p>
+
+\[\|e_{(i)}\|_{A} \le \left(\frac{k-1}{k+1}\right)^i \|e_{(0)}\|_{A}\]
+
+<p>and from earlier observation $f(x_{(i)})= f(x) + \frac{1}{2}e_{(i)}^TAe_{(i)}$ we have</p>
+
+\[\begin{align}
+\frac{f(x_{(i)})-f(x)}{f(x_{(i)})-f(x_{(0)})} &amp;= \frac{\frac{1}{2}e_{(i)}^TAe_{(i)}}{\frac{1}{2}e_{(0)}^TAe_{(0)}} \\
+&amp;\le \left(\frac{k-1}{k+1}\right)^{2i}
+\end{align}\]
+
+<hr />
+
+<p>TODOs to support understanding:</p>
+<ul>
+  <li>Jacobi method and the difference between smoothers and roughers</li>
+  <li>eigenvectors = principal axis of ellipses</li>
+  <li>proof of if $A$ is symmetric, then there exists a set of $n$ orthonormal eigenvectors of $A$.</li>
+</ul>
+
+  </div><a class="u-url" href="/matrix-computations/cg-part-1/" hidden></a>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  </script>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <!-- <p class="feed-subscribe"> -->
+        <!--   <a href="http://localhost:4000/feed.xml"> -->
+        <!--     <svg class="svg-icon orange"> -->
+        <!--       <use xlink:href="/assets/minima-social-icons.svg#rss"></use> -->
+        <!--     </svg><span>Subscribe</span> -->
+        <!--   </a> -->
+        <!-- </p> -->
+        <ul class="contact-list">
+          <li class="p-name">Kerem Okyay</li>
+          <li><a class="u-email" href="mailto:kerem13okyay at gmail">kerem13okyay at gmail</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p>This is a website where I collect things I want to remember the intuition behind.
+</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -14,11 +14,11 @@
 <meta property="og:url" content="http://localhost:4000/computational-geometry/foldover/" />
 <meta property="og:site_name" content="Kerem’s Investigations" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2026-01-07T15:15:59+01:00" />
+<meta property="article:published_time" content="2026-01-10T21:10:42+01:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Making sense of Foldover-free maps" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Kerem Okyay"},"dateModified":"2026-01-07T15:15:59+01:00","datePublished":"2026-01-07T15:15:59+01:00","description":"This is my attempt to make sense of the derivations in the article “Foldover-free maps in 50 lines of code” from Garanzha and collaborators. The article.","headline":"Making sense of Foldover-free maps","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/computational-geometry/foldover/"},"url":"http://localhost:4000/computational-geometry/foldover/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Kerem Okyay"},"dateModified":"2026-01-10T21:10:42+01:00","datePublished":"2026-01-10T21:10:42+01:00","description":"This is my attempt to make sense of the derivations in the article “Foldover-free maps in 50 lines of code” from Garanzha and collaborators. The article.","headline":"Making sense of Foldover-free maps","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/computational-geometry/foldover/"},"url":"http://localhost:4000/computational-geometry/foldover/"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Kerem&apos;s Investigations" />
 </head>
@@ -43,8 +43,8 @@
 
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">Making sense of Foldover-free maps</h1>
-    <p class="post-meta"><time class="dt-published" datetime="2026-01-07T15:15:59+01:00" itemprop="datePublished">
-        Jan 7, 2026
+    <p class="post-meta"><time class="dt-published" datetime="2026-01-10T21:10:42+01:00" itemprop="datePublished">
+        Jan 10, 2026
       </time></p>
   </header>
 
@@ -114,12 +114,6 @@ C_{n1} &amp; \cdots &amp; C_{nn} \\
 
 <p>The special name for cofactor matrix transposed is <em>adjugate matrix</em>.</p>
 
-<p>Using the Laplace’s expansion we can find the derivative below as</p>
-
-\[\frac{d}{dJ} \det J = \mathrm{C(J)}\]
-
-<p>Where $C(J)$ is the cofactor matrix of $J$.</p>
-
 <hr />
 
 <h1 id="understanding-the-gradient-expression">Understanding the gradient expression</h1>
@@ -184,13 +178,20 @@ For a scalar function $f$ derivative wrt to a matrix is:</p>
 \frac{\partial f}{\partial A_{m1}} &amp;  \frac{\partial f}{\partial A_{m2}} &amp; \cdots &amp;  \frac{\partial f}{\partial A_{mn}} \\
 \end{bmatrix}\]
 
-<p>The result is the same size as $A$.
-Then using that we can find the derivative of the below expression:</p>
+<p>The result is the same size as $A$.</p>
+
+<p>Then using that we can find the derivative of the below expression:</p>
 
 \[\begin{align}
 \mathrm{tr}J^\top J &amp;=  \|J\|_{F}^2 = \sum_{i=1}^3 \sum_{j=1}^3 (J_{ij})^2 \\
 \frac{d}{dJ} \mathrm{tr}J^\top J &amp;=  2J\\
 \end{align}\]
+
+<p>Also, using the Laplace’s expansion for the determinant of $J$ we can find its derivative below as</p>
+
+\[\frac{d}{dJ} \det J = \mathrm{C(J)}\]
+
+<p>Where $C(J)$ is the cofactor matrix of $J$.</p>
 
 <hr />
 
@@ -252,7 +253,8 @@ P &amp;=
 
 <p>What paper has:</p>
 
-<p>\((\nabla F)_{g_{j}} += \frac{\det S}{d!} \sum_{i=1}^3z_{ji} \frac{\partial \phi}{\partial  \underline{a}_{i}}\)</p>
+\[(\nabla F)_{g_{j}} += \frac{\det S}{d!} \sum_{i=1}^3z_{ji} \frac{\partial \phi}{\partial  \underline{a}_{i}}\]
+
 <ul>
   <li>$z_{ji} =\frac{\partial\lambda_{j}}{\partial x_{i}}$</li>
   <li>$\frac{\partial \phi}{\partial  \underline{a}_{i}} = P(:,i)$</li>
@@ -272,7 +274,7 @@ P &amp;=
 \right) \mathrm{Cof}(J)
 \end{align}\]
 
-<p>what paper has (which contains my interpretation on what chi needs to take as parameter cus they do not provide it)</p>
+<p>what the paper has</p>
 
 \[\frac{\partial \phi}{\partial  \underline{a}_{i}} = \frac{2}{\chi(I_{3})^{2/3}} \underline{a}_{i} - \frac{1}{\chi(I_{3})} 
 \left(

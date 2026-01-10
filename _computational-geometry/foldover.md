@@ -86,13 +86,6 @@ $$
 
 The special name for cofactor matrix transposed is *adjugate matrix*. 
 
-Using the Laplace's expansion we can find the derivative below as 
-
-$$
-\frac{d}{dJ} \det J = \mathrm{C(J)}
-$$ 
-
-Where $C(J)$ is the cofactor matrix of $J$.
 
 ---
 
@@ -184,6 +177,8 @@ $$
 $$
 
 The result is the same size as $A$.
+
+
 Then using that we can find the derivative of the below expression:
 
 $$
@@ -192,6 +187,15 @@ $$
 \frac{d}{dJ} \mathrm{tr}J^\top J &=  2J\\
 \end{align}
 $$
+
+
+Also, using the Laplace's expansion for the determinant of $J$ we can find its derivative below as 
+
+$$
+\frac{d}{dJ} \det J = \mathrm{C(J)}
+$$ 
+
+Where $C(J)$ is the cofactor matrix of $J$.
 
 --- 
 
@@ -274,6 +278,7 @@ What paper has:
 $$
 (\nabla F)_{g_{j}} += \frac{\det S}{d!} \sum_{i=1}^3z_{ji} \frac{\partial \phi}{\partial  \underline{a}_{i}}
 $$
+
 - $z_{ji} =\frac{\partial\lambda_{j}}{\partial x_{i}}$
 - $\frac{\partial \phi}{\partial  \underline{a}_{i}} = P(:,i)$
 
@@ -295,7 +300,7 @@ $$
 
 
 
-what paper has (which contains my interpretation on what chi needs to take as parameter cus they do not provide it)
+what the paper has 
 
 $$
 \frac{\partial \phi}{\partial  \underline{a}_{i}} = \frac{2}{\chi(I_{3})^{2/3}} \underline{a}_{i} - \frac{1}{\chi(I_{3})} 
