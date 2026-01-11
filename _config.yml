@@ -1,4 +1,4 @@
-title: Kerem's Investigations
+title: Mergen'in İzi
 author:
   name: Kerem Okyay
   email: kerem13okyay at gmail 
@@ -6,7 +6,7 @@ author:
 # The `>` after `description:` means to ignore line-breaks until next key.
 # If you want to omit the line-break after the end of text, use `>-` instead.
 description: >
-  This is a website where I collect things I want to remember the intuition behind.
+  Yol üstünde notlar ve düşünceler.
 
 collections:
   matrix-computations: 

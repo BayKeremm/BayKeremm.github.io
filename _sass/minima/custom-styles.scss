@@ -1,2 +1,120 @@
 // Placeholder to allow defining custom styles that override everything else.
 // (Use `_sass/minima/custom-variables.scss` to override variable defaults)
+
+// for subdirectories page below -------------------
+/* Container */
+.compact-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid #eaeaea; /* Start with a line */
+  max-width: 800px;
+  margin: 2rem auto;
+}
+
+/* Individual Row */
+.compact-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 0.5rem; /* Small padding top/bottom */
+  border-bottom: 1px solid #eaeaea; /* Simple divider lines */
+  text-decoration: none;
+  color: #333;
+  transition: background-color 0.2s ease, padding-left 0.2s ease;
+}
+
+/* Hover Effect */
+.compact-item:hover {
+  background-color: #f9f9f9;
+  padding-left: 1rem; /* Subtle indentation on hover */
+  color: #000;
+}
+
+/* Typography */
+.compact-content {
+  display: flex;
+  flex-direction: column; /* Stacks title and desc tightly */
+  gap: 0.1rem;
+}
+
+.compact-title {
+  font-size: 1rem; /* Standard readable size, not huge */
+  font-weight: 600;
+}
+
+.compact-desc {
+  font-size: 0.85rem;
+  color: #888;
+  font-weight: 400;
+}
+
+/* The Arrow */
+.compact-arrow {
+  font-size: 1.1rem;
+  color: #ccc;
+  margin-left: 1rem;
+}
+
+.compact-item:hover .compact-arrow {
+  color: #007bff; /* Highlight color */
+}
+
+/* Optional: Make description inline on desktop to save even more space */
+@media (min-width: 768px) {
+  .compact-content {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+}
+
+// for landing page below -------------------
+
+/* Container: Fills the width of the parent element */
+.collection-stack {
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Ensures it matches your page width */
+  margin: 1.5rem 0; /* Standard margin top/bottom */
+}
+
+/* The Row: Minimal padding for a "slim" look */
+.stack-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 0; /* Very small top/bottom padding */
+  border-bottom: 1px solid #eee; /* Light divider */
+  text-decoration: none;
+  color: #333;
+  transition: color 0.2s ease, padding-left 0.2s ease;
+}
+
+/* Remove the border from the last item */
+.stack-row:last-child {
+  border-bottom: none;
+}
+
+/* Hover: Simple text color change and small indent */
+.stack-row:hover {
+  color: #007bff; /* Blue text on hover */
+  padding-left: 0.5rem; /* Slight shift right feels interactive */
+  background-color: transparent; /* No background color change needed */
+}
+
+/* Typography */
+.row-title {
+  margin: 0;
+  font-size: 1rem; /* Standard text size */
+  font-weight: 500; /* Regular weight */
+}
+
+/* Arrow */
+.row-arrow {
+  font-size: 1rem;
+  color: #ddd; /* Light gray arrow */
+}
+
+.stack-row:hover .row-arrow {
+  color: #007bff;
+}

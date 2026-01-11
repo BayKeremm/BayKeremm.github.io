@@ -1,21 +1,21 @@
 ---
-#
-# By default, content added below the "---" mark will appear in the home page
-# between the top bar and the list of recent posts.
-# To change the home page layout, edit the _layouts/home.html file.
-# See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-#
 layout: page
 ---
 
-<ul>
+# Topics
+<div class="collection-stack">
   {% for collection in site.collections %}
     {% unless collection.label == 'posts' %}
-      <li>
-        <a href="/{{ collection.label }}/">
-          {{ collection.label | capitalize }}
-        </a>
-      </li>
+      
+      <a href="/{{ collection.label }}/" class="stack-row">
+        <div class="row-content">
+          <h3 class="row-title">{{ collection.label | capitalize }}</h3>
+        </div>
+        <div class="row-meta">
+          <span class="row-arrow">&rarr;</span>
+        </div>
+      </a>
+
     {% endunless %}
   {% endfor %}
-</ul>
+</div>
