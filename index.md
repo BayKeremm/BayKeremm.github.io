@@ -2,7 +2,6 @@
 layout: page
 ---
 
-# Topics
 <div class="collection-stack">
   {% for collection in site.collections %}
     {% unless collection.label == 'posts' %}
