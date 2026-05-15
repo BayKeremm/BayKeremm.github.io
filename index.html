@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+		<head>
+			<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+		/>
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css" />
+		<link rel="stylesheet" href="dist/reveal.css" />
+			<link rel="stylesheet" href="dist/theme/black.css" />
+
+			<!-- Theme used for syntax highlighted code -->
+                        <link rel="stylesheet" href="dist/theme/white.css" />
+			<style>
+	                        .reveal {
+	                        	font-size: 25px;
+	                        }
+				.reveal h1,
+				.reveal h2,
+				.reveal h3 {
+					text-transform: none;
+					margin-bottom: 0.6em;
+				}
+
+				.reveal h1 {
+					font-size: 1.7em;
+				}
+
+				.reveal h2 {
+					font-size: 1.35em;
+				}
+
+				.reveal h3 {
+					font-size: 1.1em;
+				}
+			</style>
+		</head>
+		<body>
+			<div class="reveal">
+				<div class="slides">
+					<section
+						data-markdown="./slides/context.md"
+						data-separator="^---$"
+						data-separator-vertical="^--$"
+						data-separator-notes="^Note:"
+					></section>
+					<section
+						data-markdown="./slides/preprocessing.md"
+						data-separator="^---$"
+						data-separator-vertical="^--$"
+						data-separator-notes="^Note:"
+					></section>
+					<section
+						data-markdown="./slides/segmentation.md"
+						data-separator="^---$"
+						data-separator-vertical="^--$"
+						data-separator-notes="^Note:"
+					></section>
+					<section
+						data-markdown="./slides/interface_ops.md"
+						data-separator="^---$"
+						data-separator-vertical="^--$"
+						data-separator-notes="^Note:"
+					></section>
+					<section
+						data-markdown="./slides/deformation.md"
+						data-separator="^---$"
+						data-separator-vertical="^--$"
+						data-separator-notes="^Note:"
+					></section>
+					<section
+						data-markdown="./slides/results.md"
+						data-separator="^---$"
+						data-separator-vertical="^--$"
+						data-separator-notes="^Note:"
+					></section>
+					<section
+						data-markdown="./slides/conclusion.md"
+						data-separator="^---$"
+						data-separator-vertical="^--$"
+						data-separator-notes="^Note:"
+					></section>
+				</div>
+			</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="dist/plugin/notes.js"></script>
+		<script src="dist/plugin/markdown.js"></script>
+		<script src="dist/plugin/highlight.js"></script>
+		<script src="dist/plugin/math.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				margin: 0.1,
+				center: false,
+				mathjax4: {
+					tex: {
+						inlineMath: [['$', '$'], ['\\(', '\\)']],
+						displayMath: [['$$', '$$'], ['\\[', '\\]']]
+					}
+				},
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.MathJax4()],
+			});
+		</script>
+	</body>
+</html>
