@@ -54,29 +54,30 @@
   <img src="figures/new_rocker_toplam.png" style="width: 120%;" />
 </div>
 
---
-
-<div style="display: flex; justify-content: center; margin: 1.5rem 0 2rem;">
-  <img src="figures/results_3.png" alt="New approach pipeline" style="width: 100%;" />
-</div>
-
---
-
-<div style="display: flex; justify-content: center; margin: 1.5rem 0 2rem;">
-  <img src="figures/results_1.png" alt="New approach pipeline" style="width: 100%;" />
-</div>
-
---
-
-<div style="display: flex; justify-content: center; margin: 1.5rem 0 2rem;">
-  <img src="figures/results_2.png" alt="New approach pipeline" style="width: 100%;" />
-</div>
-
---
-
-<div style="display: flex; justify-content: center; margin: 1.5rem 0 2rem;">
-  <img src="figures/results_4.png" alt="New approach pipeline" style="width: 100%;" />
-</div>
+<!-- -- -->
+<!-- # Extras -->
+<!---->
+<!-- <div style="display: flex; justify-content: center; margin: 1.5rem 0 2rem;"> -->
+<!--   <img src="figures/results_3.png" alt="New approach pipeline" style="width: 100%;" /> -->
+<!-- </div> -->
+<!---->
+<!-- -- -->
+<!---->
+<!-- <div style="display: flex; justify-content: center; margin: 1.5rem 0 2rem;"> -->
+<!--   <img src="figures/results_1.png" alt="New approach pipeline" style="width: 100%;" /> -->
+<!-- </div> -->
+<!---->
+<!-- -- -->
+<!---->
+<!-- <div style="display: flex; justify-content: center; margin: 1.5rem 0 2rem;"> -->
+<!--   <img src="figures/results_2.png" alt="New approach pipeline" style="width: 100%;" /> -->
+<!-- </div> -->
+<!---->
+<!-- -- -->
+<!---->
+<!-- <div style="display: flex; justify-content: center; margin: 1.5rem 0 2rem;"> -->
+<!--   <img src="figures/results_4.png" alt="New approach pipeline" style="width: 100%;" /> -->
+<!-- </div> -->
 
 ---
 # Enright deformation test
