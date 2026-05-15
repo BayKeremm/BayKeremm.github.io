@@ -1,10 +1,10 @@
-<div style="margin-top: 2.3rem; text-align: center;">
+<div style="margin-top: 1.6rem; text-align: center;">
 
 # Conformal Meshes in X-Mesh 3D
 
 ### Volume Fitting to Target Surface Mesh
 
-<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.65rem; width: 76%; margin: 1.5rem auto 1.8rem; align-items: end;">
+<div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.65rem; width: 76%; margin: 1.35rem auto 1.35rem; align-items: end;">
   <div style="height: 190px; display: flex; align-items: center; justify-content: center;">
     <img src="figures/blue_bimba_1.png" alt="Red Bimba input" style="max-width: 100%; max-height: 100%; object-fit: contain;" />
   </div>
@@ -21,9 +21,16 @@
 
 <div style="height: 0.75rem;"></div>
 
-Kerem Okyay
+<div style="font-size: 1.05em; margin-top: 0.35rem;">Kerem Okyay</div>
 
-May 2026
+<div style="font-size: 0.82em; margin-top: 0.35rem; color: #334155;">Antoine Quiriny, Jonathan Lambrechts, Nicolas Möes, Jean-François Remacle</div>
+
+<div style="font-size: 0.82em; margin-top: 0.55rem;">CSMA, 19 May 2026</div>
+
+<div style="display: flex; justify-content: center; align-items: center; gap: 2.4rem; margin-top: 1rem;">
+  <img src="pictures/ucl.png" alt="UCLouvain" style="height: 120px; width: auto; object-fit: contain;" />
+  <img src="pictures/erc.png" alt="ERC" style="height: 120px; width: auto; object-fit: contain;" />
+</div>
 </div>
 
 ---

@@ -7,7 +7,7 @@
 			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
 		/>
 
-		<title>reveal.js</title>
+		<title>Conformal Meshes in X-Mesh 3D</title>
 
 		<link rel="stylesheet" href="dist/reset.css" />
 		<link rel="stylesheet" href="dist/reveal.css" />
@@ -36,6 +36,14 @@
 
 				.reveal h3 {
 					font-size: 1.1em;
+				}
+
+				.reveal .slide-number {
+					font-size: 2em;
+					color: #000;
+					background: transparent;
+					padding: 0;
+					box-shadow: none;
 				}
 			</style>
 		</head>
@@ -100,6 +108,8 @@
 				hash: true,
 				margin: 0.1,
 				center: false,
+				controls: false,
+				slideNumber: true,
 				mathjax4: {
 					tex: {
 						inlineMath: [['$', '$'], ['\\(', '\\)']],

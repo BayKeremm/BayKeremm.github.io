@@ -74,7 +74,7 @@ Winding numbers are a way to tell if we are inside a given shape or not.
   <div style="width: 40%; text-align: left;">
     Assign each tetrahedron a binary label \(x_i \in \{0,1\}\) by minimizing:
     $$
-    E(\underline{x}) = \underbrace{\sum_i D_i(x_i)}_{\text{Data term}} + \underbrace{\sum_{(i,j)} w_{ij} |x_i - x_j|}_{\text{Regularization term}}
+    E(\underline{x}) = \underbrace{\sum_i D_i(x_i)}_{\text{Data term}} + \underbrace{\sum_{(i,j)} \alpha w_{ij} |x_i - x_j|}_{\text{Regularization term}}
     $$
   </div>
   <div style="width: 60%; text-align: center;">
@@ -83,26 +83,6 @@ Winding numbers are a way to tell if we are inside a given shape or not.
 </div>
 
 Popular way of segmenting images/meshes from 2000s.
-
-<!-- -- -->
-<!-- # Graph-cut construction -->
-<!-- <div style="display: flex; gap: 4rem; justify-content: center; align-items: center; margin-top: 1.5rem;"> -->
-<!--   <div style="width: 50%; text-align: left;"> -->
-<!--     <ul> -->
-<!--       <li>Data term: Generalized winding numbers</li> -->
-<!--       <li>Regularization term: Facet area</li> -->
-<!--     </ul> -->
-<!---->
-<!--   </div> -->
-<!--   <div style="width: 50%; text-align: center;"> -->
-<!--     <img src="figures/flow_graph.png" alt="Graph-cut flow graph" style="width: 100%;" /> -->
-<!--   </div> -->
-<!-- </div> -->
-<!-- <div style="height: 1rem;"></div> -->
-<!-- The minimum cut gives the optimal binary labeling for the energy. -->
-<!-- $$ -->
-<!-- E(\underline{x}) = \underbrace{\sum_i D_i(x_i)}_{\text{Data term}} + \underbrace{\sum_{(i,j)} w_{ij} |x_i - x_j|}_{\text{Regularization term}} -->
-<!-- $$ -->
 
 ---
 # On being 2-manifold

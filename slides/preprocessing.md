@@ -58,30 +58,6 @@ $$
 </div>
 
 
-<!-- TODO: Put this as a backup slide-->
-<!-- <div style="display: flex; gap: 4rem; justify-content: center; align-items: center; margin-top: 2rem;"> -->
-<!--   <div style="width: 42%; text-align: left; font-size: 0.9em;"> -->
-<!---->
-<!-- $$ -->
-<!-- h(\underline{x}) = e_n + (e_f - e_n) s(\xi(\underline{x})) -->
-<!-- $$ -->
-<!---->
-<!-- $$ -->
-<!-- \xi(\underline{x}) = \min\left(\frac{\operatorname{dist}(\underline{x}, S)}{r}, 1\right) -->
-<!-- $$ -->
-<!---->
-<!--   </div> -->
-<!--   <div style="width: 30%; text-align: center;"> -->
-<!--     <img src="figures/monotone_func.png" alt="Monotone function" style="width: 50%;" /> -->
-<!---->
-<!-- $$ -->
-<!-- s(x) = 3x^2 - 2x^3 -->
-<!-- $$ -->
-<!---->
-<!--   </div> -->
-<!-- </div> -->
-<!---->
-
 ---
 
  # Remarks 
