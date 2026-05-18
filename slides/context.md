@@ -56,7 +56,7 @@ Make the domain conformal to the target surface **by only moving the vertices**.
 
 <div style="height: 1.25rem;"></div>
 
-<div style="display: flex; gap: 5rem; justify-content: center; align-items: center; margin-top: 2rem;">
+<div style="display: flex; gap: 2rem; justify-content: center; align-items: center; margin-top: 2rem;">
   <img src="figures/new_spot_domain.png" alt="Cross section spot" style="width: 60%;" />
   <img src="figures/new_spot.png" alt="Approximation spot" style="width: 60%;" />
 </div>
@@ -64,7 +64,6 @@ Make the domain conformal to the target surface **by only moving the vertices**.
 Highly constrained problem.
 
 ---
-# Stages of the pipeline
 <div style="display: flex; justify-content: center;">
   <img src="figures/cycle_of_life_small.jpg" alt="New approach pipeline" style="width: 90%;" />
 </div>

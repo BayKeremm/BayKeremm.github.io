@@ -36,7 +36,7 @@
 
 # Complexity graph
 <div style="display: flex; justify-content: center; margin: 0.5rem 0 2rem;">
-  <img src="figures/complexity_graph_2_small.jpg" style="width: 90%;" />
+  <img src="figures/complexity_graph_2_small.jpg" style="width: 80%;" />
 </div>
 
 --
@@ -44,14 +44,14 @@
 # Homer 
 
 <div style="display: flex; justify-content: center; margin: 1.5rem 0 2rem;">
-  <img src="figures/new_homer_toplam.png" style="width: 120%;" />
+  <img src="figures/new_homer_toplam.png" style="width: 90%;" />
 </div>
 
 --
 # Rocker-arm 
 
 <div style="display: flex; justify-content: center; margin: 1.5rem 0 2rem;">
-  <img src="figures/new_rocker_toplam.png" style="width: 120%;" />
+  <img src="figures/new_rocker_toplam.png" style="width: 90%;" />
 </div>
 
 <!-- -- -->
@@ -94,10 +94,9 @@
   ></video>
 </div>
 
+Popular test case for interface tracking methods.
 
 ---
-
-# Enright deformation test
 
 <div style="width: 82%; margin: 1rem auto 0; text-align: center;">
   <video
@@ -110,3 +109,4 @@
     style="width: 100%; max-height: 560px; object-fit: contain;"
   ></video>
 </div>
+After some point, we cannot track the very thin part.

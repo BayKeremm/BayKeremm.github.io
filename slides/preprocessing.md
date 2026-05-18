@@ -1,7 +1,6 @@
-
-# Redistribute vertices around the target surface
+### Redistribute vertices around the target surface
 <div style="display: flex; justify-content: center;">
-  <img src="figures/cycle_of_life_preprocess_small.jpg" alt="New approach pipeline" style="width: 90%;" />
+  <img src="figures/cycle_of_life_preprocess_small.jpg" alt="New approach pipeline" style="width: 85%;" />
 </div>
 
 ---
@@ -26,7 +25,7 @@
 
 Prescribe **smaller** target tetrahedra near the interface.
 
-<div style="width: 60%; margin: 1.5rem auto; text-align: center;">
+<div style="width: 40%; margin: 1.5rem auto; text-align: center;">
   <img src="figures/sized_tets.png" alt="sized tets" style="width: 100%;" />
 </div>
 Then optimize for the energy with $\theta = 0.5$
@@ -58,15 +57,15 @@ $$
 </div>
 
 
----
-
- # Remarks 
-
-<div style="display: flex; justify-content: center;">
-  <img src="figures/2_prep_with_torus.png" alt="New approach pipeline" style="width: 40%;" />
-</div>
-
-- Hard to get the collar region around the interface.
-- For thinner shapes the tetrahedra inside can be stretched
-
-
+<!-- --- -->
+<!---->
+<!--  # Remarks  -->
+<!---->
+<!-- <div style="display: flex; justify-content: center;"> -->
+<!--   <img src="figures/2_prep_with_torus.png" alt="New approach pipeline" style="width: 40%;" /> -->
+<!-- </div> -->
+<!---->
+<!-- - Hard to get the collar region around the interface. -->
+<!-- - For thinner shapes the tetrahedra inside can be stretched -->
+<!---->
+<!---->

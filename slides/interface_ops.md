@@ -1,6 +1,6 @@
 # On being 2-manifold
 <div style="width: 70%; margin: 0 auto; text-align: center;">
-    <img src="figures/bad_stuff.png" alt="Nonmanifold features" style="width: 100%;" />
+    <img src="figures/slechte_dingen.png" alt="Nonmanifold features" style="width: 85%;" />
 </div>
 
 ---

@@ -1,6 +1,6 @@
-# Classify tetrahedra "inside" or "outside"
+### Classify tetrahedra "inside" or "outside"
 <div style="display: flex; justify-content: center;">
-  <img src="figures/cycle_of_life_segment_small.jpg" alt="New approach pipeline" style="width: 90%;" />
+  <img src="figures/cycle_of_life_segment_small.jpg" alt="New approach pipeline" style="width: 85%;" />
 </div>
 
 ---
@@ -33,21 +33,17 @@ Winding numbers are a way to tell if we are inside a given shape or not.
 </div>
 
 --
-
-<div style="text-align: center; margin-top: 0.25rem;">
-  <div style="font-size: 0.78em; letter-spacing: 0.09em; text-transform: uppercase; color: #64748b; margin-bottom: 0.35rem;">Step 1</div>
-  <h2 style="margin: 0 0 0.45rem 0;">Construct the graph</h2>
-  <div style="margin: 0 auto; width: 84%;">
-    <img src="figures/pedagoji_1.png" style="width: 100%; max-height: 500px; object-fit: contain; display: block; transform: translateX(3%);" />
+### Construct the graph
+<div style="text-align: center;">
+  <div style="margin: 0 auto; width: 75%;">
+    <img src="figures/pedagoji_1.png" />
   </div>
 </div>
 
 --
-
+### Find minimum cut for $a = 0.01$
 <div style="text-align: center; margin-top: 0.1rem;">
-  <div style="font-size: 0.78em; letter-spacing: 0.09em; text-transform: uppercase; color: #64748b; margin-bottom: 0.35rem;">Step 2</div>
-  <h2 style="margin: 0 0 0.45rem 0;">Find minimum cut for $a = 0.01$</h2>
-  <div style="margin: 0 auto; width: 86%;">
+  <div style="margin: 0 auto; width: 95%;">
     <img src="figures/pedagoji_2.png" style="width: 100%; max-height: 480px; object-fit: contain; display: block; transform: translateX(3%);" />
   </div>
   <div style="display: inline-block; margin-top: 0.6rem; padding: 0.45rem 0.9rem; border-radius: 999px; background: #e0f2fe; color: #075985; font-weight: 700; box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);">
@@ -57,10 +53,8 @@ Winding numbers are a way to tell if we are inside a given shape or not.
 </div>
 
 --
-
+### The case for $a = 2$
 <div style="text-align: center; margin-top: 0.1rem;">
-  <div style="font-size: 0.78em; letter-spacing: 0.09em; text-transform: uppercase; color: #64748b; margin-bottom: 0.35rem;">Step 3</div>
-  <h2 style="margin: 0 0 0.45rem 0;">$a = 2$</h2>
   <div style="margin: 0 auto; width: 78%;">
     <img src="figures/pedagoji_3.png" style="width: 100%; max-height: 480px; object-fit: contain; display: block; transform: translateX(3%);" />
   </div>
@@ -71,15 +65,15 @@ Winding numbers are a way to tell if we are inside a given shape or not.
 
 ---
 # Mesh Segmentation
-<div style="display: flex; gap: 4rem; justify-content: center; align-items: center; margin-top: 1.5rem;">
+<div style="display: flex; gap: 0.5rem; justify-content: center; align-items: center; margin-top: 1.5rem;">
   <div style="width: 40%; text-align: left;">
-    Assign each tetrahedron a binary label \(x_i \in \{0,1\}\) by minimizing:
+    Assign each tetrahedron a label \(x_i \in \{0,1\}\) by minimizing:
     $$
     E(\underline{x}) = \underbrace{\sum_i D_i(x_i)}_{\text{Data term}} + \underbrace{\sum_{(i,j)} \alpha w_{ij} |x_i - x_j|}_{\text{Regularization term}}
     $$
   </div>
   <div style="width: 60%; text-align: center;">
-    <img src="figures/flow_graph.png" alt="Flow graph" style="width: 100%;" />
+    <img src="figures/flow_graph.png" alt="Flow graph" style="width: 70%;" />
   </div>
 </div>
 
@@ -92,7 +86,7 @@ $$
 E(\underline{x}) = \sum_i D_i(x_i) + \sum_{(i,j)} \alpha w_{ij} |x_i - x_j|
 $$
 
-  Larger $\alpha$ favors a smaller interface.
+  Larger $\alpha$ favors a smaller interface area.
 
 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.7rem; width: 96%; margin: 0.8rem auto 0; align-items: end;">
   <div style="text-align: center;">

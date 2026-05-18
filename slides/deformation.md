@@ -1,6 +1,6 @@
-# Move nodes towards the target surface
+### Move nodes towards the target surface
 <div style="display: flex; justify-content: center;">
-  <img src="figures/cycle_of_life_deform_small.jpg" alt="New approach pipeline" style="width: 90%;" />
+  <img src="figures/cycle_of_life_deform_small.jpg" alt="New approach pipeline" style="width: 85%;" />
 </div>
 ---
 # Deformation
